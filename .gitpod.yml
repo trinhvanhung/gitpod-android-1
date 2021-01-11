@@ -1,5 +1,4 @@
-image:
-  file: .gitpod.Dockerfile
+image: kitproject/gitpod-flutter:v1-13-6
 ports:
-  - port: 6080
+  - port: 8080
     onOpen: ignore
