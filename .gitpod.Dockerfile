@@ -1,14 +1,24 @@
-FROM gitpod/workspace-full-vnc
+FROM gitpod/workspace-full
 
+ENV FLUTTER_HOME=/home/gitpod/flutter \
+    FLUTTER_CHANNEL=beta
+
+# Install dart
 USER root
 
-RUN add-apt-repository ppa:maarten-fonville/android-studio && \
-    apt-get update && \
-    apt-get install android-sdk \
-        lib32stdc++6 \
-        android-studio \
-        android-sdk-build-tools \
-        android-sdk \
-        android-sdk-platform-23 --no-install-recommends --yes \
-        && apt-get clean \
-        && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get upgrade -y
+
+USER gitpod
+
+# Install Flutter sdk
+RUN cd /home/gitpod && \
+    git clone https://github.com/flutter/flutter.git && \
+    $FLUTTER_HOME/bin/flutter channel ${FLUTTER_CHANNEL} && \
+    $FLUTTER_HOME/bin/flutter upgrade && \
+    $FLUTTER_HOME/bin/flutter config --enable-web
+
+# Change the PUB_CACHE to /workspace so dependencies are preserved.
+ENV PUB_CACHE=/workspace/.pub_cache
+
+# add executables to PATH
+RUN echo 'export PATH=${FLUTTER_HOME}/bin:${FLUTTER_HOME}/bin/cache/dart-sdk/bin:${PUB_CACHE}/bin:${FLUTTER_HOME}/.pub-cache/bin:$PATH' >>~/.bashrc
