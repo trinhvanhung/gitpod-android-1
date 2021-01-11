@@ -2,6 +2,13 @@ FROM gitpod/workspace-full-vnc
 
 USER root
 
-RUN sudo apt-get update && \
-    sudo apt-get install -y libx11-dev libxkbfile-dev libsecret-1-dev libgconf2–4 libnss3 && \
-    sudo rm -rf /var/lib/apt/lists/*
+RUN add-apt-repository ppa:maarten-fonville/android-studio && \
+    apt-get update && \
+    apt-get install android-sdk \
+        lib32stdc++6 \
+        android-studio \
+        android-sdk-build-tools \
+        android-sdk \
+        android-sdk-platform-23 --no-install-recommends --yes \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
