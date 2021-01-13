@@ -1,4 +1,3 @@
-image: 
-  file: .gitpod.Dockerfile
+image: gitpod/workspace-flutter
 ports:
   - port: 8080
