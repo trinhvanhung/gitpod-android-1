@@ -58,7 +58,7 @@ RUN rm -rf android-sdk.zip
 RUN mkdir ~/.android
 RUN touch ~/.android/repositories.cfg
 RUN yes | sdkmanager --licenses --sdk_root=$ANDROID_HOME
-RUN sdkmanager "tools" "build-tools;${BUILD_TOOLS_VERSION}" "platforms;${PLATFORMS_VERSION}" "platform-tools" "extras;android;m2repository" --sdk_root=$ANDROID_HOME
+RUN sdkmanager "build-tools;${BUILD_TOOLS_VERSION}" "platforms;${PLATFORMS_VERSION}" "extras;android;m2repository" --sdk_root=$ANDROID_HOME
 
 # Install Flutter sdk
 RUN cd $HOME && \
