@@ -1,6 +1,6 @@
 FROM gitpod/workspace-full-vnc
 
-ARG ANDROID_SDK_URL=https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS_VERSION}.zip
+ARG ANDROID_SDK_URL=https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip
 ARG ANDROID_STUDIO_URL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/4.1.2.0/android-studio-ide-201.7042882-linux.tar.gz
 ENV ANDROID_HOME=/home/gitpod/android-sdk \
     ANDROID_STUDIO_HOME=/home/gitpod/android-studio \
