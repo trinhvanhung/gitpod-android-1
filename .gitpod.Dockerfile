@@ -2,10 +2,10 @@ FROM gitpod/workspace-full-vnc
 
 ARG ANDROID_SDK_URL=https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip
 ARG ANDROID_STUDIO_URL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/4.1.2.0/android-studio-ide-201.7042882-linux.tar.gz
-ENV ANDROID_HOME=/home/gitpod/android-sdk \
-    ANDROID_STUDIO_HOME=/home/gitpod/android-studio \
-    FLUTTER_HOME=/home/gitpod/flutter \
-    PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/cmdline-tools/bin:$PATH
+ENV ANDROID_HOME=/home/gitpod/android-sdk
+ENV ANDROID_STUDIO_HOME=/home/gitpod/android-studio
+ENV FLUTTER_HOME=/home/gitpod/flutter
+ENV PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/cmdline-tools/bin:$PATH
 
 USER root
 
