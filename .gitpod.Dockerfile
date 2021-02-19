@@ -5,7 +5,7 @@ ARG ANDROID_STUDIO_URL=https://redirector.gvt1.com/edgedl/android/studio/ide-zip
 ENV ANDROID_HOME=/home/gitpod/android-sdk \
     ANDROID_STUDIO_HOME=/home/gitpod/android-studio \
     FLUTTER_HOME=/home/gitpod/flutter \
-    PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/tools/bin:$PATH
+    PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/cmdline-tools/bin:$PATH
 
 USER root
 
