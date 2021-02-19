@@ -43,7 +43,7 @@ RUN cd $HOME && \
     rm -rf android-sdk.zip && \
     mkdir ~/.android && \
     touch ~/.android/repositories.cfg && \
-    yes | sdkmanager --licenses >/dev/null
+    yes | sdkmanager --licenses >/dev/null --sdk_root=$ANDROID_HOME
 
 # Install Android Studio
 RUN cd $HOME && \
@@ -52,7 +52,7 @@ RUN cd $HOME && \
     mkdir -p $HOME/.local/bin && \
     printf '\nPATH=$HOME/.local/bin:$PATH\n' | \
         tee -a /home/gitpod/.bashrc && \
-    ln -s $HOME/android-studio/bin/studio.sh \
+    ln -s $ANDROID_STUDIO_HOME/bin/studio.sh \
       /home/gitpod/.local/bin/android_studio
 
 # Install Flutter sdk
