@@ -46,7 +46,7 @@ RUN mv android-sdk/cmdline-tools android-sdk/tools
 RUN rm -rf android-sdk.zip
 RUN mkdir ~/.android
 RUN touch ~/.android/repositories.cfg
-RUN yes | sdkmanager --licenses >/dev/null
+RUN yes | sdkmanager --licenses
 RUN sdkmanager "tools" "build-tools;${BUILD_TOOLS_VERSION}" "platforms;${PLATFORMS_VERSION}" "platform-tools" "extras;android;m2repository"
 
 # Install Android Studio
