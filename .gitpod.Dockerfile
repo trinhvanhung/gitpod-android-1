@@ -39,7 +39,7 @@ USER gitpod
 # Install AndroidSDK
 RUN cd $HOME && \
     wget -O android-sdk.zip $ANDROID_SDK_URL && \
-    && unzip -q -d android-sdk android-sdk.zip && \
+    unzip -q -d android-sdk android-sdk.zip && \
     rm -rf android-sdk.zip && \
     mkdir ~/.android && \
     touch ~/.android/repositories.cfg && \
