@@ -37,22 +37,22 @@ RUN \
 USER gitpod
 
 # Install AndroidSDK
-RUN cd $HOME && \
-    wget -O android-sdk.zip $ANDROID_SDK_URL && \
-    unzip -q -d android-sdk android-sdk.zip && \
-    rm -rf android-sdk.zip && \
-    mkdir ~/.android && \
-    touch ~/.android/repositories.cfg && \
-    yes | sdkmanager --licenses >/dev/null --sdk_root=$ANDROID_HOME
+RUN cd $HOME
+RUN wget -O android-sdk.zip $ANDROID_SDK_URL
+RUN unzip -q -d android-sdk android-sdk.zip
+RUN rm -rf android-sdk.zip
+RUN mkdir ~/.android
+RUN touch ~/.android/repositories.cfg
+RUN yes | sdkmanager --licenses >/dev/null --sdk_root=$ANDROID_HOME
 
 # Install Android Studio
-RUN cd $HOME && \
-    wget -O android-studio-ide.tar.gz $ANDROID_STUDIO_URL && \
-    tar xf android-studio-ide.tar.gz && rm android-studio-ide.tar.gz && \
-    mkdir -p $HOME/.local/bin && \
-    printf '\nPATH=$HOME/.local/bin:$PATH\n' | \
-        tee -a /home/gitpod/.bashrc && \
-    ln -s $ANDROID_STUDIO_HOME/bin/studio.sh \
+RUN cd $HOME
+RUN wget -O android-studio-ide.tar.gz $ANDROID_STUDIO_URL
+RUN tar xf android-studio-ide.tar.gz && rm android-studio-ide.tar.gz
+RUN mkdir -p $HOME/.local/bin
+RUN printf '\nPATH=$HOME/.local/bin:$PATH\n' | \
+        tee -a /home/gitpod/.bashrc
+RUN ln -s $ANDROID_STUDIO_HOME/bin/studio.sh \
       /home/gitpod/.local/bin/android_studio
 
 # Install Flutter sdk
