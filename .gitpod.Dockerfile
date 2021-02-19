@@ -38,6 +38,9 @@ RUN \
 
 USER gitpod
 
+RUN ./home/gitpod/.sdkman/bin/sdkman-init.sh
+RUN sdk install java 12.0.1.j9-adpt
+
 # Install AndroidSDK
 RUN cd $HOME
 RUN wget -O android-sdk.zip $ANDROID_SDK_URL
