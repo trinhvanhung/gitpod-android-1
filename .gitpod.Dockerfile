@@ -31,6 +31,10 @@ RUN dpkg --add-architecture i386 && \
   rm -rf /tmp/* && \
   rm -rf /var/tmp/*
 
+# fix display resolution
+RUN \
+  sed -i 's/1920x1080/1280x720/' /usr/bin/start-vnc-session.sh
+
 USER gitpod
 
 RUN mkdir ${ANDROID_HOME};
@@ -45,7 +49,12 @@ RUN wget --wget -O ${ANDROID_HOME}/android-sdk.zip https://dl.google.com/android
 
 # Install Android Studio
 RUN wget -O ${ANDROID_HOME}/android-studio-ide.tar.gz $ANDROID_STUDIO_URL && \
-    cd ${ANDROID_HOME} && tar xf android-studio-ide.tar.gz && rm android-studio-ide.tar.gz;
+    cd ${ANDROID_HOME} && tar xf android-studio-ide.tar.gz && rm android-studio-ide.tar.gz && \
+    mkdir -p $HOME/.local/bin && \
+    printf '\nPATH=$HOME/.local/bin:$PATH\n' | \
+        tee -a /home/gitpod/.bashrc && \
+    ln -s ${ANDROID_HOME}/android-studio/bin/studio.sh \
+      /home/gitpod/.local/bin/android_studio
 
 # Install Flutter sdk
 RUN cd /home/gitpod && \
