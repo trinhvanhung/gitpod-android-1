@@ -1,0 +1,21 @@
+<application>
+  <component name="ActionsLocalSummary">
+    <data>
+      <entry key="EditCustomProperties">
+        <ActionSummary times="1" last="1613724454049" />
+      </entry>
+      <entry key="EditCustomVmOptions">
+        <ActionSummary times="1" last="1613724462013" />
+      </entry>
+      <entry key="ShowSettings">
+        <ActionSummary times="2" last="1613724416560" />
+      </entry>
+      <entry key="WelcomeScreen.CreateNewProject">
+        <ActionSummary times="1" last="1613724377845" />
+      </entry>
+      <entry key="performancePlugin.ShowMemoryDialogAction">
+        <ActionSummary times="1" last="1613724469486" />
+      </entry>
+    </data>
+  </component>
+</application>

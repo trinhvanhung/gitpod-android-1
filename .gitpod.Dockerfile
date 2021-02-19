@@ -43,7 +43,7 @@ RUN unzip -q -d android-sdk android-sdk.zip
 RUN rm -rf android-sdk.zip
 RUN mkdir ~/.android
 RUN touch ~/.android/repositories.cfg
-RUN yes | sdkmanager --licenses >/dev/null
+# RUN yes | sdkmanager --licenses >/dev/null
 
 # Install Android Studio
 RUN cd $HOME
