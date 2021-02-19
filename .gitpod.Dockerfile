@@ -7,7 +7,7 @@ ARG PLATFORMS_VERSION=android-29
 ENV ANDROID_HOME=/home/gitpod/android-sdk
 ENV ANDROID_STUDIO_HOME=/home/gitpod/android-studio
 ENV FLUTTER_HOME=/home/gitpod/flutter
-ENV JAVA_HOME=$ANDROID_STUDIO_HOME/jre/bin
+ENV JAVA_HOME=$ANDROID_STUDIO_HOME/jre
 ENV PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$PATH
 
 USER root
