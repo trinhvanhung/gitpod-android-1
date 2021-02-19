@@ -2,10 +2,12 @@ FROM gitpod/workspace-full-vnc
 
 ARG ANDROID_SDK_URL=https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip
 ARG ANDROID_STUDIO_URL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/4.1.2.0/android-studio-ide-201.7042882-linux.tar.gz
+ARG BUILD_TOOLS_VERSION=29.0.2
+ARG PLATFORMS_VERSION=android-29
 ENV ANDROID_HOME=/home/gitpod/android-sdk
 ENV ANDROID_STUDIO_HOME=/home/gitpod/android-studio
 ENV FLUTTER_HOME=/home/gitpod/flutter
-ENV PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/cmdline-tools/bin:$PATH
+ENV PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$PATH
 
 USER root
 
@@ -40,10 +42,12 @@ USER gitpod
 RUN cd $HOME
 RUN wget -O android-sdk.zip $ANDROID_SDK_URL
 RUN unzip -q -d android-sdk android-sdk.zip
+RUN mv android-sdk/cmdline-tools android-sdk/tools
 RUN rm -rf android-sdk.zip
 RUN mkdir ~/.android
 RUN touch ~/.android/repositories.cfg
-# RUN yes | sdkmanager --licenses >/dev/null
+RUN yes | sdkmanager --licenses >/dev/null
+RUN sdkmanager "tools" "build-tools;${BUILD_TOOLS_VERSION}" "platforms;${PLATFORMS_VERSION}" "platform-tools" "extras;android;m2repository"
 
 # Install Android Studio
 RUN cd $HOME
