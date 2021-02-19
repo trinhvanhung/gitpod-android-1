@@ -1,25 +1,56 @@
 FROM gitpod/workspace-full-vnc
 
-
-ENV ANDROID_HOME=/home/gitpod/android-sdk-linux \
+ARG ANDROID_STUDIO_URL=https://dl.google.com/dl/android/studio/ide-zips/4.0.0.16/android-studio-ide-193.6514223-linux.tar.gz
+ARG ANDROID_STUDIO_VERSION=4.0
+ARG ANDROID_SDK_TOOLS="4333796"
+ARG GRADLE_VERSION="5.6.4"
+ENV ANDROID_HOME=/home/gitpod/android \
     FLUTTER_HOME=/home/gitpod/flutter \
     PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/tools:$PATH
 
 USER root
 
-RUN curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-    curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list && \
+# Install dependencies
+RUN dpkg --add-architecture i386 && \
     apt-get update && \
-    apt-get -y install build-essential dart libkrb5-dev gcc make gradle android-tools-adb android-tools-fastboot && \
-    apt-get clean && \
-    apt-get -y autoremove && \
-    apt-get -y clean && \
-    rm -rf /var/lib/apt/lists/*;
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+      coreutils            \
+      curl                 \
+      expect               \
+      lib32gcc1            \
+      lib32ncurses5-dev    \
+      lib32stdc++6         \
+      lib32z1              \
+      libc6-i386           \
+      pv                   \
+      unzip                \
+      wget  && \
+  apt-get clean && \
+  rm -rf /var/cache/apt/* && \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /tmp/* && \
+  rm -rf /var/tmp/*
 
 USER gitpod
 
-RUN cd /home/gitpod && wget -qO flutter_sdk.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.0.0-stable.tar.xz \
-    && tar -xvf flutter_sdk.tar.xz && rm flutter_sdk.tar.xz && \
-    wget -qO android_studio.zip https://dl.google.com/dl/android/studio/ide-zips/3.3.0.20/android-studio-ide-182.5199772-linux.zip && \
-    unzip android_studio.zip && rm -f android_studio.zip && \
-    wget --output-document=android-sdk.tgz --quiet http://dl.google.com/android/android-sdk_r26.1.1-linux.tgz && tar -xvf android-sdk.tgz && rm android-sdk.tgz;
+RUN mkdir ${ANDROID_HOME};
+
+# Install AndroidSDK
+RUN wget --wget -O ${ANDROID_HOME}/android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip && \
+    cd ${ANDROID_HOME} && unzip -q -d sdk android-sdk.zip && \
+    rm -rf android-sdk.zip && \
+    mkdir ~/.android && \
+    touch ~/.android/repositories.cfg && \
+    yes | sdkmanager --licenses >/dev/null
+
+# Install Android Studio
+RUN wget -O ${ANDROID_HOME}/android-studio-ide.tar.gz $ANDROID_STUDIO_URL && \
+    cd ${ANDROID_HOME} && tar xf android-studio-ide.tar.gz && rm android-studio-ide.tar.gz;
+
+# Install Flutter sdk
+RUN cd /home/gitpod && \
+    git clone https://github.com/flutter/flutter.git && \
+    cd $FLUTTER_HOME/examples/hello_world && \
+    $FLUTTER_HOME/bin/flutter channel ${FLUTTER_CHANNEL} && \
+    $FLUTTER_HOME/bin/flutter upgrade && \
+    $FLUTTER_HOME/bin/flutter config --enable-web
