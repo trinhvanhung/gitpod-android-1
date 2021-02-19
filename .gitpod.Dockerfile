@@ -7,6 +7,7 @@ ARG PLATFORMS_VERSION=android-29
 ENV ANDROID_HOME=/home/gitpod/android-sdk
 ENV ANDROID_STUDIO_HOME=/home/gitpod/android-studio
 ENV FLUTTER_HOME=/home/gitpod/flutter
+ENV JAVA_HOME=$ANDROID_STUDIO_HOME/jre/bin
 ENV PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$PATH
 
 USER root
@@ -38,8 +39,15 @@ RUN \
 
 USER gitpod
 
-RUN ./home/gitpod/.sdkman/bin/sdkman-init.sh
-RUN sdk install java 12.0.1.j9-adpt
+# Install Android Studio
+RUN cd $HOME
+RUN wget -O android-studio-ide.tar.gz $ANDROID_STUDIO_URL
+RUN tar xf android-studio-ide.tar.gz && rm android-studio-ide.tar.gz
+RUN mkdir -p $HOME/.local/bin
+RUN printf '\nPATH=$HOME/.local/bin:$PATH\n' | \
+        tee -a /home/gitpod/.bashrc
+RUN ln -s $ANDROID_STUDIO_HOME/bin/studio.sh \
+      /home/gitpod/.local/bin/android_studio
 
 # Install AndroidSDK
 RUN cd $HOME
@@ -51,16 +59,6 @@ RUN mkdir ~/.android
 RUN touch ~/.android/repositories.cfg
 RUN yes | sdkmanager --licenses
 RUN sdkmanager "tools" "build-tools;${BUILD_TOOLS_VERSION}" "platforms;${PLATFORMS_VERSION}" "platform-tools" "extras;android;m2repository"
-
-# Install Android Studio
-RUN cd $HOME
-RUN wget -O android-studio-ide.tar.gz $ANDROID_STUDIO_URL
-RUN tar xf android-studio-ide.tar.gz && rm android-studio-ide.tar.gz
-RUN mkdir -p $HOME/.local/bin
-RUN printf '\nPATH=$HOME/.local/bin:$PATH\n' | \
-        tee -a /home/gitpod/.bashrc
-RUN ln -s $ANDROID_STUDIO_HOME/bin/studio.sh \
-      /home/gitpod/.local/bin/android_studio
 
 # Install Flutter sdk
 RUN cd $HOME && \
