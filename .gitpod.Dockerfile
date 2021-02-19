@@ -4,9 +4,9 @@ ARG ANDROID_STUDIO_URL=https://dl.google.com/dl/android/studio/ide-zips/4.0.0.16
 ARG ANDROID_STUDIO_VERSION=4.0
 ARG ANDROID_SDK_TOOLS="4333796"
 ARG GRADLE_VERSION="5.6.4"
-ENV ANDROID_HOME=/home/gitpod/android \
+ENV ANDROID_HOME=/home/gitpod/android/sdk \
     FLUTTER_HOME=/home/gitpod/flutter \
-    PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/tools:$PATH
+    PATH=/usr/lib/dart/bin:$FLUTTER_HOME/bin:$ANDROID_HOME/tools:$PATH:$ANDROID_HOME/tools/bin:$PATH
 
 USER root
 
@@ -37,11 +37,11 @@ RUN \
 
 USER gitpod
 
-RUN mkdir ${ANDROID_HOME};
+RUN cd /home/gitpod && mkdir android;
 
 # Install AndroidSDK
-RUN wget --wget -O ${ANDROID_HOME}/android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip && \
-    cd ${ANDROID_HOME} && unzip -q -d sdk android-sdk.zip && \
+RUN wget -O /home/gitpod/android/android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip && \
+    cd /home/gitpod/android && unzip -q -d sdk android-sdk.zip && \
     rm -rf android-sdk.zip && \
     mkdir ~/.android && \
     touch ~/.android/repositories.cfg && \
