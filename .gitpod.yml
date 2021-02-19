@@ -1,5 +1,7 @@
 image:
   file: .gitpod.Dockerfile
+tasks:
+  - init: mkdir /home/gitpod/.config/Google/ && cp -r /workspace/gitpod-android/AndroidStudio4.1 ~/.config/Google//AndroidStudio4.1
 ports:
   - port: 6080
     protocol: "http"
