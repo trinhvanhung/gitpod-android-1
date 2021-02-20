@@ -1,0 +1,35 @@
+<application>
+  <component name="DimensionService">
+    <location key="WELCOME_SCREEN.0.0.1280.720" x="640" y="300" />
+  </component>
+  <component name="WindowManager">
+    <frame x="-1" y="-1" width="1282" height="726" extendedState="6" />
+    <layout>
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
+    </layout>
+  </component>
+  <component name="WindowStateApplicationService">
+    <state x="235" y="0" width="802" height="707" key="#Plugins" timestamp="1613803228392">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="235" y="0" width="802" height="707" key="#Plugins/0.0.1280.720" timestamp="1613803228392" />
+    <state x="379" y="167" width="515" height="318" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1613803513806">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="379" y="167" width="515" height="318" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1280.720" timestamp="1613803513806" />
+    <state x="423" y="104" width="429" height="507" key="FileChooserDialogImpl" timestamp="1613803512037">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="423" y="104" width="429" height="507" key="FileChooserDialogImpl/0.0.1280.720" timestamp="1613803512037" />
+    <state x="641" y="336" key="WELCOME_SCREEN" timestamp="1613803228397">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="641" y="336" key="WELCOME_SCREEN/0.0.1280.720" timestamp="1613803228397" />
+  </component>
+</application>
