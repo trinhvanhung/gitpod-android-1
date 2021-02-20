@@ -4,6 +4,7 @@ ARG ANDROID_SDK_URL=https://dl.google.com/android/repository/commandlinetools-li
 ARG ANDROID_STUDIO_URL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/4.1.2.0/android-studio-ide-201.7042882-linux.tar.gz
 ARG BUILD_TOOLS_VERSION=30.0.3
 ARG PLATFORMS_VERSION=android-30
+ARG SOURCES_VERSION=android-30
 ENV ANDROID_HOME=/home/gitpod/android-sdk
 ENV ANDROID_STUDIO_HOME=/home/gitpod/android-studio
 ENV FLUTTER_HOME=/home/gitpod/flutter
